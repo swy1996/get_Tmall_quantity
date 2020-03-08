@@ -117,14 +117,13 @@ def timer(n):
         time.sleep(n)
 
 if __name__ == '__main__':
-    while True:
-        try:
-            with open(config_file_name, 'r') as f:
-                load_config = json.load(f)
-                all_forwait_time = load_config["all_forwait_time"]
-                timer(all_forwait_time)
-        except:
-            print("第一阶段读取配置错误,请检查配置文件！")
+    try:
+        with open(config_file_name, 'r') as f:
+            load_config = json.load(f)
+            all_forwait_time = load_config["all_forwait_time"]
+            timer(all_forwait_time)
+    except:
+        print("第一阶段读取配置错误,请检查配置文件！")
 
 
 
