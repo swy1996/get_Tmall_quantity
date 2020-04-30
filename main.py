@@ -41,21 +41,21 @@ def get_data(data,index):
                         title = json.loads(response.content.decode())['data']['item']['title']
                         img_url = "http:" + json.loads(response.content.decode())['data']['item']['images'][0]
                         print(title + "    " + is_buy)
-                        tongzhi(title + is_buy, data, img_url)
+                        # tongzhi(title + is_buy, data, img_url)
                     # 判断库存的数量超过500通知
                     if float(json.loads(json.loads(response.content.decode())['data']['apiStack'][0]['value'])['skuCore']['sku2info']['0']['quantity']) > load_config['kucun_all_count_msg'] and load_config['id_list'][index]['msg_kucun']=="true":
                         is_buy = "库存="+str(json.loads(json.loads(response.content.decode())['data']['apiStack'][0]['value'])['skuCore']['sku2info']['0']['quantity'])
                         title = json.loads(response.content.decode())['data']['item']['title']
                         img_url = "http:" + json.loads(response.content.decode())['data']['item']['images'][0]
                         print(title + "    " + is_buy)
-                        tongzhi(title + is_buy, data, img_url)
+                        # tongzhi(title + is_buy, data, img_url)
                     # 商品上架通知
                     if json.loads(json.loads(response.content.decode())['data']['apiStack'][0]['value'])['trade']['buyEnable']=='true':
                         is_buy = "已上架"
                         title = json.loads(response.content.decode())['data']['item']['title']
                         img_url = "http:" + json.loads(response.content.decode())['data']['item']['images'][0]
                         print(title + "    " +is_buy+ "    " +'库存' + json.loads(json.loads(response.content.decode())['data']['apiStack'][0]['value'])['skuCore']['sku2info']['0']['quantity'])
-                        tongzhi(title + is_buy, data, img_url)
+                        # tongzhi(title + is_buy, data, img_url)
                     # 商品未上架
                     elif json.loads(json.loads(response.content.decode())['data']['apiStack'][0]['value'])['trade']['buyEnable']=='false':
                         is_buy = "未上架"
@@ -90,7 +90,7 @@ def read_config():
 
 def write_config():
     try:
-        with open(config_file_name, 'w') as f:
+        with open(config_file_name, 'w',encoding='utf-8') as f:
             json.dump(load_config, f, indent=1,ensure_ascii=False)
             print("更新文件完成...")
     except:
@@ -118,7 +118,7 @@ def timer(n):
 
 if __name__ == '__main__':
     try:
-        with open(config_file_name, 'r') as f:
+        with open(config_file_name, 'r',encoding='utf-8') as f:
             load_config = json.load(f)
             all_forwait_time = load_config["all_forwait_time"]
             timer(all_forwait_time)
